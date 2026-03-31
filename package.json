@@ -7,4 +7,3 @@
     "build": "node -e \"process.exit(0)\""
   }
 }
-
