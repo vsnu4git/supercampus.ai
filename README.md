@@ -33,6 +33,10 @@ Then your URL will be:
 
 Then add your custom domain in Vercel → Project → Settings → Domains.
 
+### If Vercel CLI says “Failed to locate package.json”
+
+This repo includes `package.json` + `vercel.json` so the CLI can deploy it as a static site with **no install** and **no build**.
+
 ## Deploy on Netlify
 
 1. Import this GitHub repo in Netlify.
