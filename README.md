@@ -1,9 +1,5 @@
-# Supercampus static image
+# Supercampus coming soon
 
-This repo serves one image at the site root:
-
-- `/` → `/images/supercampus.png`
-
-Direct URL:
+This repo serves a simple “Coming Soon” page at `/` and hosts the banner image at:
 
 - `/images/supercampus.png`
