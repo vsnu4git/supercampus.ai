@@ -56,3 +56,11 @@ Examples:
 
 - `https://example.com/images/logo.png`
 - `https://example.com/images/avatar.jpg`
+
+## Show only the image at `/`
+
+This repo rewrites:
+
+- `/` → `/images/supercampus.png`
+
+So visiting your deployment root shows only the image.
