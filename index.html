@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supercampus Image Host</title>
+    <meta
+      name="description"
+      content="A tiny React site that serves images from /images on your own domain."
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #0b0f1a;
+        --panel: rgba(255, 255, 255, 0.06);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.7);
+        --border: rgba(255, 255, 255, 0.12);
+        --accent: #7c3aed;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #f6f7fb;
+          --panel: rgba(0, 0, 0, 0.04);
+          --text: rgba(0, 0, 0, 0.88);
+          --muted: rgba(0, 0, 0, 0.62);
+          --border: rgba(0, 0, 0, 0.12);
+          --accent: #6d28d9;
+        }
+      }
+      body {
+        margin: 0;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: radial-gradient(
+            900px 600px at 15% 0%,
+            rgba(124, 58, 237, 0.28),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px 600px at 90% 10%,
+            rgba(14, 165, 233, 0.2),
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--text);
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 42px 18px 60px;
+      }
+      .top {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .brand h1 {
+        margin: 0;
+        font-size: 26px;
+        letter-spacing: -0.02em;
+      }
+      .brand p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--panel);
+      }
+      .chip code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        color: var(--text);
+      }
+      .grid {
+        margin-top: 26px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      @media (min-width: 860px) {
+        .grid {
+          grid-template-columns: 1.05fr 0.95fr;
+        }
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--panel);
+        border-radius: 16px;
+        padding: 16px;
+        overflow: hidden;
+      }
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 16px;
+        letter-spacing: -0.01em;
+      }
+      .preview {
+        display: grid;
+        place-items: center;
+        min-height: 260px;
+        border-radius: 12px;
+        border: 1px dashed var(--border);
+        background: rgba(0, 0, 0, 0.08);
+      }
+      @media (prefers-color-scheme: light) {
+        .preview {
+          background: rgba(255, 255, 255, 0.6);
+        }
+      }
+      .preview img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      .muted {
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 12px;
+      }
+      .btn {
+        appearance: none;
+        border: 1px solid var(--border);
+        background: transparent;
+        color: var(--text);
+        border-radius: 12px;
+        padding: 10px 12px;
+        cursor: pointer;
+      }
+      .btn.primary {
+        border-color: rgba(124, 58, 237, 0.55);
+        background: rgba(124, 58, 237, 0.18);
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+          "Liberation Mono", "Courier New", monospace;
+        font-size: 13px;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow-x: auto;
+        background: rgba(0, 0, 0, 0.1);
+        flex: 1;
+        min-width: 240px;
+      }
+      @media (prefers-color-scheme: light) {
+        .code {
+          background: rgba(255, 255, 255, 0.7);
+        }
+      }
+      .toast {
+        margin-top: 10px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .footer {
+        margin-top: 18px;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .k {
+        color: var(--muted);
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(0, 0, 0, 0.06);
+      }
+      @media (prefers-color-scheme: light) {
+        .pill {
+          background: rgba(255, 255, 255, 0.55);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div id="root"></div>
+    </div>
+
+    <script type="module">
+      import React from "https://esm.sh/react@18";
+      import { createRoot } from "https://esm.sh/react-dom@18/client";
+
+      const DEFAULT_IMAGE_PATH = "/images/supercampus.png";
+      const FALLBACK_IMAGE_PATH = "/images/sample.svg";
+
+      function joinUrl(origin, path) {
+        try {
+          return new URL(path, origin).toString();
+        } catch {
+          return path;
+        }
+      }
+
+      function App() {
+        const [imagePath, setImagePath] = React.useState(DEFAULT_IMAGE_PATH);
+        const [toast, setToast] = React.useState("");
+        const [fallbackUsed, setFallbackUsed] = React.useState(false);
+
+        const origin =
+          typeof window !== "undefined" && window.location
+            ? window.location.origin
+            : "";
+        const directUrl = joinUrl(origin, imagePath);
+
+        async function copy(text) {
+          try {
+            await navigator.clipboard.writeText(text);
+            setToast("Copied!");
+          } catch {
+            setToast("Copy failed — select and copy manually.");
+          } finally {
+            window.setTimeout(() => setToast(""), 1600);
+          }
+        }
+
+        return React.createElement(
+          React.Fragment,
+          null,
+          React.createElement(
+            "div",
+            { className: "top" },
+            React.createElement(
+              "div",
+              { className: "brand" },
+              React.createElement("h1", null, "Image Host (React)"),
+              React.createElement(
+                "p",
+                null,
+                "Put your files in ",
+                React.createElement("span", { className: "pill" }, "/images"),
+                " and they become direct URLs on your domain."
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "chip" },
+              React.createElement("span", { className: "k" }, "Direct URL:"),
+              React.createElement("code", null, imagePath)
+            )
+          ),
+          React.createElement(
+            "div",
+            { className: "grid" },
+            React.createElement(
+              "div",
+              { className: "card" },
+              React.createElement("h2", null, "Preview"),
+              React.createElement(
+                "div",
+                { className: "preview" },
+                React.createElement("img", {
+                  src: imagePath,
+                  alt: "Hosted image preview",
+                  loading: "lazy",
+                  onError: () => {
+                    if (imagePath !== FALLBACK_IMAGE_PATH) {
+                      setFallbackUsed(true);
+                      setToast(
+                        `Missing ${imagePath}. Add it to the repo, or showing fallback.`
+                      );
+                      setImagePath(FALLBACK_IMAGE_PATH);
+                      window.setTimeout(() => setToast(""), 2200);
+                    }
+                  },
+                })
+              ),
+              React.createElement(
+                "div",
+                { className: "footer" },
+                fallbackUsed
+                  ? React.createElement(
+                      React.Fragment,
+                      null,
+                      "Fallback is showing. Add ",
+                      React.createElement(
+                        "code",
+                        null,
+                        DEFAULT_IMAGE_PATH.replace(/^\//, "")
+                      ),
+                      " to your repo to use your real image."
+                    )
+                  : "If you replace the file, keep the same name to keep the URL stable."
+              )
+            ),
+            React.createElement(
+              "div",
+              { className: "card" },
+              React.createElement("h2", null, "Get the URL"),
+              React.createElement(
+                "p",
+                { className: "muted" },
+                "Deploy this repo to Vercel/Netlify, add your custom domain, then your image is available at:"
+              ),
+              React.createElement(
+                "div",
+                { className: "row" },
+                React.createElement("div", { className: "code" }, directUrl),
+                React.createElement(
+                  "button",
+                  {
+                    className: "btn primary",
+                    onClick: () => copy(directUrl),
+                    type: "button",
+                  },
+                  "Copy URL"
+                )
+              ),
+              React.createElement(
+                "p",
+                { className: "muted" },
+                "Want a different file? Change the path below (it must exist in your repo)."
+              ),
+              React.createElement(
+                "div",
+                { className: "row" },
+                React.createElement("input", {
+                  className: "code",
+                  value: imagePath,
+                  onChange: (e) => setImagePath(e.target.value.trim() || "/"),
+                  spellCheck: false,
+                  inputMode: "url",
+                  "aria-label": "Image path",
+                }),
+                React.createElement(
+                  "button",
+                  {
+                    className: "btn",
+                    onClick: () => setImagePath(DEFAULT_IMAGE_PATH),
+                    type: "button",
+                  },
+                  "Reset"
+                )
+              ),
+              toast
+                ? React.createElement("div", { className: "toast" }, toast)
+                : null,
+              React.createElement(
+                "div",
+                { className: "footer" },
+                "Tip: name images like ",
+                React.createElement("code", null, "logo.png"),
+                " or ",
+                React.createElement("code", null, "avatar.jpg"),
+                " so your URLs are clean."
+              )
+            )
+          )
+        );
+      }
+
+      createRoot(document.getElementById("root")).render(
+        React.createElement(App)
+      );
+    </script>
+  </body>
+</html>
