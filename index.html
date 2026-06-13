@@ -1,128 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SuperCampus</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9983819219978847" crossorigin="anonymous"></script>
-
   <style>
-    * {
+    html, body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Inter, Arial, sans-serif;
+      width: 100%;
+      height: 100%;
+      background: #000;
     }
 
     body {
-      background: linear-gradient(135deg, #5f2cff, #7b3cff);
-      color: white;
+      overflow: hidden;
     }
 
     .container {
-      min-height: 100vh;
+      width: 100vw;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
       align-items: center;
-      padding: 20px;
-      text-align: center;
-    }
-
-    .badge {
-      background: rgba(255,255,255,0.15);
-      padding: 6px 12px;
-      border-radius: 999px;
-      font-size: 14px;
-      margin-bottom: 20px;
-    }
-
-    h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
-      max-width: 800px;
-      line-height: 1.2;
-    }
-
-    .highlight {
-      color: #ffd6ff;
-    }
-
-    p {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 600px;
-    }
-
-    .buttons {
-      margin-top: 30px;
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
       justify-content: center;
+      background: #000;
     }
 
-    .btn {
-      padding: 14px 26px;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: 0.2s ease;
-    }
-
-    .primary {
-      background: white;
-      color: #5f2cff;
-      font-weight: 600;
-    }
-
-    .primary:hover {
-      transform: translateY(-2px);
-    }
-
-    .secondary {
-      border: 1px solid rgba(255,255,255,0.5);
-      color: white;
-    }
-
-    .secondary:hover {
-      background: rgba(255,255,255,0.1);
-    }
-
-    /* Mobile */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.2rem;
-      }
-
-      p {
-        font-size: 1rem;
-      }
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
     }
   </style>
 </head>
-
 <body>
-
   <div class="container">
-    
-    <div class="badge">🚀 Coming Soon</div>
-
-    <h1>
-      The Future of <span class="highlight">Campus Life</span>
-    </h1>
-
-    <p>
-      SuperCampus connects students, ideas, and opportunities into one seamless platform.
-    </p>
-
-    <div class="buttons">
-      <a href="#" class="btn primary">Get Started</a>
-      <a href="#" class="btn secondary">Learn More</a>
-    </div>
-
+    <img src="images/supercampus.png" alt="SuperCampus">
   </div>
-
 </body>
 </html>
