@@ -4,9 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
   <title>SuperCampus</title>
-  <link rel="canonical" href="/">
+  <link rel="canonical" href="https://supercampus.ai/">
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js"></script>
+  <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
   <style amp-boilerplate>
     body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}
     @-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}
@@ -24,31 +25,55 @@
     html, body {
       margin: 0;
       width: 100%;
-      height: 100%;
+      min-height: 100%;
       background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    amp-auto-ads {
+      display: block;
+    }
+
+    .ad-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 12px 12px 0;
     }
 
     .container {
-      width: 100vw;
-      height: 100vh;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #000;
+      padding: 12px;
+      box-sizing: border-box;
     }
 
     amp-img {
       max-width: 100%;
-      max-height: 100%;
     }
   </style>
 </head>
 <body>
   <amp-auto-ads type="adsense" data-ad-client="ca-pub-9983819219978847"></amp-auto-ads>
+
+  <div class="ad-wrap">
+    <amp-ad
+      width="728"
+      height="90"
+      layout="responsive"
+      type="adsense"
+      data-ad-client="ca-pub-9983819219978847"
+      data-ad-slot="8357567396">
+    </amp-ad>
+  </div>
+
   <div class="container">
     <amp-img src="images/supercampus.png" width="1600" height="900" layout="responsive" alt="SuperCampus"></amp-img>
   </div>
